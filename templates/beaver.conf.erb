@@ -1,0 +1,4 @@
+# Managed by puppet - do not modify
+[beaver]
+redis_url = redis://<%= scope.lookupvar('beaver::redis_host') %>:<%= scope.lookupvar('beaver::redis_port') %>/<%= scope.lookupvar('beaver::redis_db') %>
+redis_namespace: <%= scope.lookupvar('beaver::redis_namespace') %>

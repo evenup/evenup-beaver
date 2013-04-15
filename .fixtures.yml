@@ -1,0 +1,6 @@
+fixtures:
+  repositories:
+    concat: git://github.com/ripienaar/puppet-concat.git
+  symlinks:
+    beaver: "#{source_dir}"
+

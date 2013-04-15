@@ -1,0 +1,16 @@
+[<%= scope.lookupvar('source_real') %>]
+<% if scope.lookupvar('redis_url') != '' -%>
+redis_url: <%= scope.lookupvar('redis_url') %>
+<% end -%>
+<% if scope.lookupvar('redis_namespace') != '' -%>
+redis_namespace: <%= scope.lookupvar('redis_namespace') %>
+<% end -%>
+type: <%= scope.lookupvar('type') %>
+<%  if scope.lookupvar('tags').is_a?(Array) -%>
+tags: <%= scope.lookupvar('tags').join(',') %>
+<%  elsif scope.lookupvar('tags').is_a?(String) -%>
+tags: <%= scope.lookupvar('tags') %>
+<% end -%>
+<% if scope.lookupvar('format') != '' -%>
+format: <%= scope.lookupvar('format') %>
+<% end -%>
