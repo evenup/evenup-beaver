@@ -21,6 +21,7 @@ class beaver::package {
 
   package { 'python-beaver':
     ensure  => 'latest',
+    notify  => Class['beaver::service'],
   }
   
   file { '/etc/init.d/beaver':
