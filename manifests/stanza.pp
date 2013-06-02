@@ -16,7 +16,7 @@
 #
 # [*redis_url*]
 #   String.  Redis connection url to use for this specific log stream
-#   
+#
 # [*redis_namespace*]
 #   String.  Redis namespace to use for this specific log stream
 #

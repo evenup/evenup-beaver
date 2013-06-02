@@ -23,7 +23,7 @@ class beaver::package {
     ensure  => 'latest',
     notify  => Class['beaver::service'],
   }
-  
+
   file { '/etc/init.d/beaver':
     ensure  => file,
     mode    => '0555',
