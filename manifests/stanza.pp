@@ -58,6 +58,7 @@ define beaver::stanza (
     content => template('beaver/beaver.stanza.erb'),
     target  => '/etc/beaver.conf',
     order   => 10,
+    notify  => Class['beaver::service'],
   }
 
 }
