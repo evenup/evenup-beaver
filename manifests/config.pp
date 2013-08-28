@@ -30,6 +30,7 @@ class beaver::config {
     content => template('beaver/beaver.conf.erb'),
     target  => '/etc/beaver.conf',
     order   => 01,
+    notify  => Class['beaver::service'],
   }
 
 }
