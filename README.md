@@ -5,6 +5,8 @@ Puppet module install and configure [beaver](https://github.com/josegonzalez/bea
 Currently only redis is supported as the transport, but it would be easy to 
 support additional transports.
 
+Note: Beaver 29 or greater is now required because of the switch to conf.d style config
+
 Usage:
 ------
 
@@ -25,6 +27,10 @@ If beaver configuration is required, just specify it in the class:
   }
 </pre>
 
+TODO:
+-----
+[] Support additional transports
+[] Support adding environment fields
 
 License:
 --------

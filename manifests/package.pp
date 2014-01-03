@@ -19,9 +19,14 @@
 #
 class beaver::package {
 
-  package { 'python-beaver':
-    ensure  => 'latest',
-    notify  => Class['beaver::service'],
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  package { $beaver::package_name:
+    ensure    => $beaver::version,
+    provider  => $beaver::package_provider,
+    notify    => Class['beaver::service'],
   }
 
   file { '/etc/init.d/beaver':
@@ -30,6 +35,20 @@ class beaver::package {
     owner   => 'root',
     group   => 'root',
     source  => 'puppet:///modules/beaver/beaver.init',
+  }
+
+  file { '/etc/beaver':
+    ensure  => 'directory',
+    mode    => '0555',
+    owner   => 'root',
+    group   => 'root',
+  }
+
+  file { '/etc/beaver/conf.d':
+    ensure  => 'directory',
+    mode    => '0555',
+    owner   => 'root',
+    group   => 'root',
   }
 
 }

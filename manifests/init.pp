@@ -9,6 +9,18 @@
 #   Boolean.  Should the beaver service be running?
 #   Default: true
 #
+# [*package_name*]
+#   String.  Name of the beaver package
+#   Default: beaver
+#
+# [*package_provider*]
+#   String.  Package provider for beaver
+#   Default: pip
+#
+# [*version*]
+#   String.  What version of beaver to install
+#   Default: installed
+#
 # [*redis_host*]
 #   String.  Default redis to send logs to
 #   Default: localhost
@@ -25,6 +37,23 @@
 #   String.  Default namespace beaver should write logs to
 #   Default:  logstash::beaver
 #
+# [*logstash_version*]
+#   Integer.  Pre-1.2 (0) or 1.2+ logstash (1)?
+#   Default: 0
+#
+# [*enable_sincedb*]
+#   Boolean.  Whether or not sincedb tracking should be enabled
+#   Default: true
+#
+# [*sincedb_path*]
+#   String.  Location for sincedb sqlite3 database.  Beaver needs rw to this location
+#   Default: /tmp/beaver
+#
+# [*multiline_regex_after*]
+#   String.   If a line match this regular expression, it will be merged with next line(s)
+#
+# [*multiline_regex_before*]
+#   String.   If a line match this regular expression, it will be merged with previous line(s).
 #
 # === Examples
 #
@@ -42,16 +71,31 @@
 # Copyright 2013 EvenUp.
 #
 class beaver (
-  $enable           = true,
-  $redis_host       = 'localhost',
-  $redis_db         = 0,
-  $redis_port       = 6379,
-  $redis_namespace  = 'logstash:beaver'
-){
+  $enable                 = $beaver::params::enable,
+  $package_name           = $beaver::params::package_name,
+  $package_provider       = $beaver::params::package_provider,
+  $version                = $beaver::params::version,
+  $redis_host             = $beaver::params::redis_host,
+  $redis_db               = $beaver::params::redis_db,
+  $redis_port             = $beaver::params::redis_port,
+  $redis_namespace        = $beaver::params::redis_namespace,
+  $logstash_version       = $beaver::params::logstash_version,
+  $enable_sincedb         = $beaver::params::enable_sincedb,
+  $sincedb_path           = $beaver::params::sincedb_path,
+  $multiline_regex_after  = $beaver::params::multiline_regex_after,
+  $multiline_regex_before = $beaver::params::multiline_regex_before,
+) inherits beaver::params {
+
+  validate_bool($enable, $enable_sincedb)
+  if type($redis_db) != 'integer' { fail('redis_db is not an integer') }
+  if type($redis_port) != 'integer' { fail('redis_port is not an integer') }
+  if type($redis_port) != 'integer' { fail('redis_port is not an integer') }
+  validate_re($logstash_version, ['^[0|1]$'])
+  validate_string($redis_host, $redis_namespace)
 
   class { 'beaver::package': } ->
   class { 'beaver::config': } ~>
-  class { 'beaver::service': enable => $enable } ->
+  class { 'beaver::service': } ->
   Class['beaver']
 
 }

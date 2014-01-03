@@ -1,3 +1,7 @@
+  Rewrite to use conf.d style config (beaver 29 required)
+  Support logstash version (beaver 31)
+  sincedb support (beaver 29)
+  Multiline support (beaver 30)
 v0.0.2
   Lint/spec improvements/fixes
   Package updates restart service
