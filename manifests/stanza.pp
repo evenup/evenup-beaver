@@ -25,6 +25,10 @@
 #   Valid options: json, msgpack, raw, rawjson, string
 #   Default (unset): json
 #
+# [*sincedb_write_interval*]
+#   Integer.  Number of seconds between sincedb write updates
+#   Default: 3
+#
 #
 # === Authors
 #
@@ -37,27 +41,33 @@
 #
 define beaver::stanza (
   $type,
-  $source           = '',
-  $tags             = [],
-  $redis_url        = '',
-  $redis_namespace  = '',
-  $format           = '',
+  $source                 = '',
+  $tags                   = [],
+  $redis_url              = '',
+  $redis_namespace        = '',
+  $format                 = '',
+  $sincedb_write_interval = 3,
 ){
-
-  include beaver
-  Class['beaver::package'] ->
-  Beaver::Stanza[$name] ~>
-  Class['beaver::service']
 
   $source_real = $source ? {
     ''      => $name,
     default => $source,
   }
 
-  concat::fragment { "beaver.conf_${name}":
-    content => template('beaver/beaver.stanza.erb'),
-    target  => '/etc/beaver.conf',
-    order   => 10,
+  validate_string($type, $source, $source_real)
+  if type($sincedb_write_interval) != 'integer' { fail('sincedb_write_interval is not an integer') }
+
+  include beaver
+  Class['beaver::package'] ->
+  Beaver::Stanza[$name] ~>
+  Class['beaver::service']
+
+  $filename = regsubst($name, '[/:\n]', '_', 'GM')
+  file { "/etc/beaver/conf.d/${filename}":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    content => template("${module_name}/beaver.stanza.erb"),
     notify  => Class['beaver::service'],
   }
 

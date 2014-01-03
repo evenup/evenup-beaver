@@ -14,3 +14,6 @@ tags: <%= scope.lookupvar('tags') %>
 <% if scope.lookupvar('format') != '' -%>
 format: <%= scope.lookupvar('format') %>
 <% end -%>
+<% if scope.lookupvar('beaver::enable_sincedb') %>
+sincedb_write_interval: <%= scope.lookupvar('sincedb_write_interval') %>
+<% end -%>

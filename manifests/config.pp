@@ -4,10 +4,6 @@
 # It should not be directly called
 #
 #
-# === Parameters
-#   None
-#
-#
 # === Authors
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
@@ -19,18 +15,17 @@
 #
 class beaver::config {
 
-  concat { '/etc/beaver.conf':
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  file { '/etc/beaver.conf':
+    ensure  => 'file',
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    notify  => Class['beaver::service']
-  }
-
-  concat::fragment { 'beaver.conf_header':
     content => template('beaver/beaver.conf.erb'),
-    target  => '/etc/beaver.conf',
-    order   => 01,
-    notify  => Class['beaver::service'],
+    notify  => Class['beaver::service']
   }
 
 }

@@ -4,11 +4,6 @@
 # It should not be directly called
 #
 #
-# === Parameters
-# [*enable*]
-#   Boolean.  Should the beaver service be enabled?
-#
-#
 # === Authors
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
@@ -18,12 +13,14 @@
 #
 # Copyright 2013 EvenUp.
 #
-class beaver::service(
-  $enable = true,
-) {
+class beaver::service {
 
-  case $enable {
-    true, 'true', True: {
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  case $beaver::enable {
+    true: {
       $ensure_real = 'running'
       $enable_real = true
     }

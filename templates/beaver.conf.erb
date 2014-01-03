@@ -2,3 +2,11 @@
 [beaver]
 redis_url = redis://<%= scope.lookupvar('beaver::redis_host') %>:<%= scope.lookupvar('beaver::redis_port') %>/<%= scope.lookupvar('beaver::redis_db') %>
 redis_namespace: <%= scope.lookupvar('beaver::redis_namespace') %>
+logstash_version: <%= scope.lookupvar('beaver::logstash_version') %>
+sincedb_path: <%= scope.lookupvar('beaver::sincedb_path') %>
+<% if scope.lookupvar('beaver::multiline_regex_after') -%>
+multiline_regex_after: <%= scope.lookupvar('multiline_regex_after') %>
+<% end -%>
+<% if scope.lookupvar('beaver::enable_sincedb') and scope.lookupvar('beaver::multiline_regex_before') -%>
+multiline_regex_before: <%= scope.lookupvar('multiline_regex_before') %>
+<% end -%>
