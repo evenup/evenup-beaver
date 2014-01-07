@@ -49,6 +49,10 @@ class beaver::package {
     mode    => '0555',
     owner   => 'root',
     group   => 'root',
+    purge   => true,
+    force   => true,
+    recurse => true,
+    notify  => Class['beaver::service'],
   }
 
 }
