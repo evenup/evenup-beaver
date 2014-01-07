@@ -6,14 +6,14 @@ redis_url: <%= scope.lookupvar('redis_url') %>
 redis_namespace: <%= scope.lookupvar('redis_namespace') %>
 <% end -%>
 type: <%= scope.lookupvar('type') %>
-<%  if scope.lookupvar('tags').is_a?(Array) -%>
+<% if scope.lookupvar('tags').is_a?(Array) -%>
 tags: <%= scope.lookupvar('tags').join(',') %>
-<%  elsif scope.lookupvar('tags').is_a?(String) -%>
+<% elsif scope.lookupvar('tags').is_a?(String) -%>
 tags: <%= scope.lookupvar('tags') %>
 <% end -%>
 <% if scope.lookupvar('format') != '' -%>
 format: <%= scope.lookupvar('format') %>
 <% end -%>
-<% if scope.lookupvar('beaver::enable_sincedb') %>
+<% if scope.lookupvar('beaver::enable_sincedb') -%>
 sincedb_write_interval: <%= scope.lookupvar('sincedb_write_interval') %>
 <% end -%>
