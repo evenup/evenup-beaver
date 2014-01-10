@@ -89,7 +89,9 @@ class beaver (
   validate_bool($enable, $enable_sincedb)
   if type($redis_db) != 'integer' { fail('redis_db is not an integer') }
   if type($redis_port) != 'integer' { fail('redis_port is not an integer') }
-  validate_re($logstash_version, ['^[0|1]$'])
+  if $logstash_version > 1 {
+    fail("logstash_version must be 0 or 1, got ${logstash_version}")
+  }
   validate_string($redis_host, $redis_namespace)
 
   class { 'beaver::package': } ->
