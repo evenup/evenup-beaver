@@ -46,7 +46,7 @@ define beaver::stanza (
   $redis_url              = '',
   $redis_namespace        = '',
   $format                 = '',
-  $sincedb_write_interval = 3,
+  $sincedb_write_interval = 300,
 ){
 
   $source_real = $source ? {
