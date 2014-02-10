@@ -22,6 +22,12 @@ PuppetSyntax.exclude_paths = exclude_paths
 
 task :default => [:test]
 
+task :spec => []; Rake::Task[:spec].clear
+task :spec do
+  Rake::Task[:spec_prep].invoke
+  Rake::Task[:spec_standalone].invoke
+end
+
 desc "Run syntax, lint, and spec tests."
 task :test => [
   :syntax,
