@@ -11,6 +11,14 @@ tags: <%= scope.lookupvar('tags').join(',') %>
 <% elsif scope.lookupvar('tags').is_a?(String) -%>
 tags: <%= scope.lookupvar('tags') %>
 <% end -%>
+<% if scope.lookupvar('add_field').is_a?(Array) -%>
+add_field: <%= scope.lookupvar('add_field').join(',') %>
+<% elsif scope.lookupvar('add_field').is_a?(String) -%>
+add_field: <%= scope.lookupvar('add_field') %>
+<% end -%>
+<% if scope.lookupvar('exclude') != '' -%>
+exclude: <%= scope.lookupvar('exclude') %>
+<% end -%>
 <% if scope.lookupvar('format') != '' -%>
 format: <%= scope.lookupvar('format') %>
 <% end -%>
