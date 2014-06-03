@@ -17,9 +17,7 @@ class beaver::params {
   $package_name           = 'beaver'
   $package_provider       = 'pip'
   $version                = 'installed'
-  $redis_host             = 'localhost'
-  $redis_db               = 0
-  $redis_port             = 6379
+  $redis_url              = 'redis://localhost:6379/0'
   $redis_namespace        = 'logstash:beaver'
   $logstash_version       = 0
   $enable_sincedb         = true

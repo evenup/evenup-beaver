@@ -21,17 +21,9 @@
 #   String.  What version of beaver to install
 #   Default: installed
 #
-# [*redis_host*]
+# [*redis_url*]
 #   String.  Default redis to send logs to
-#   Default: localhost
-#
-# [*redis_db*]
-#   Integer.  Default redis db to write logs to
-#   Default: 0
-#
-# [*redis_port*]
-#   Integer.  Default port to use for the redis connection
-#   Default: 6379
+#   Default: redis://localhost:6379/0
 #
 # [*redis_namespace*]
 #   String.  Default namespace beaver should write logs to
