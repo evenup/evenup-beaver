@@ -20,6 +20,8 @@
 RETVAL=0
 PIDFILE=/var/run/beaver.pid
 LOGFILE=/var/log/beaver.log
+CONFIG=/etc/beaver/beaver.conf
+CONFD_PATH=/etc/beaver/conf.d
 
 prog=beaver
 exec=/usr/bin/beaver
@@ -30,7 +32,7 @@ if [ -f /etc/sysconfig/$prog ] ; then
     . /etc/sysconfig/$prog
 fi
 
-BEAVER_CONFIG=${BEAVER_CONFIG:-/etc/beaver.conf}
+BEAVER_CONFIG=${BEAVER_CONFIG:-$CONFIG}
 
 start() {
     [ -x $exec ] || exit 5
@@ -39,7 +41,7 @@ start() {
     umask 077
 
     echo -n $"Starting beaver: "
-    daemon $exec -D -P $PIDFILE -c $BEAVER_CONFIG -l $LOGFILE -t redis $BEAVER_OPTIONS
+    daemon $exec -D -C $CONFD_PATH -P $PIDFILE -c $BEAVER_CONFIG -l $LOGFILE -t redis $BEAVER_OPTIONS
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile

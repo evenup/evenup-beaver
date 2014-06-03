@@ -14,6 +14,12 @@
 #   String/Array of strings.  What tags should be added to this stream and
 #   passed back to logstash
 #
+# [*add_field*]
+#   String/Array of strings. 
+#
+# [*exclude*]
+#   String. Regex to match files that should be left out. eg: .gz$
+#
 # [*redis_url*]
 #   String.  Redis connection url to use for this specific log stream
 #
@@ -43,6 +49,8 @@ define beaver::stanza (
   $type,
   $source                 = '',
   $tags                   = [],
+  $add_field              = [],
+  $exclude                = '',
   $redis_url              = '',
   $redis_namespace        = '',
   $format                 = '',

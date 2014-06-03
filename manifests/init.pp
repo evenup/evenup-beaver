@@ -21,17 +21,9 @@
 #   String.  What version of beaver to install
 #   Default: installed
 #
-# [*redis_host*]
+# [*redis_url*]
 #   String.  Default redis to send logs to
-#   Default: localhost
-#
-# [*redis_db*]
-#   Integer.  Default redis db to write logs to
-#   Default: 0
-#
-# [*redis_port*]
-#   Integer.  Default port to use for the redis connection
-#   Default: 6379
+#   Default: redis://localhost:6379/0
 #
 # [*redis_namespace*]
 #   String.  Default namespace beaver should write logs to
@@ -75,9 +67,7 @@ class beaver (
   $package_name           = $beaver::params::package_name,
   $package_provider       = $beaver::params::package_provider,
   $version                = $beaver::params::version,
-  $redis_host             = $beaver::params::redis_host,
-  $redis_db               = $beaver::params::redis_db,
-  $redis_port             = $beaver::params::redis_port,
+  $redis_url              = $beaver::params::redis_url,
   $redis_namespace        = $beaver::params::redis_namespace,
   $logstash_version       = $beaver::params::logstash_version,
   $enable_sincedb         = $beaver::params::enable_sincedb,
