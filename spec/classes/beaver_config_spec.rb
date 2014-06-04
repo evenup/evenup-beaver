@@ -5,7 +5,7 @@ describe 'beaver', :type => :class do
 
   context 'config' do
     it { should contain_file('/etc/beaver.conf') }
-    pending "it should test the contents"
+    skip "it should test the contents"
   end
 
 end
