@@ -11,6 +11,20 @@ tags: <%= scope.lookupvar('tags').join(',') %>
 <% elsif scope.lookupvar('tags').is_a?(String) -%>
 tags: <%= scope.lookupvar('tags') %>
 <% end -%>
+<% if scope.lookupvar('add_field').is_a?(Array) -%>
+add_field: <% scope.lookupvar('add_field').each_with_index do |field, i| -%>
+<% if field.is_a?(Array) -%>
+<%= field.join(',') -%><%= ',' if i < (scope.lookupvar('add_field').size - 1) -%>
+<% elsif field.is_a?(String) -%>
+<%= field.join(',') -%><%= ',' if i < (scope.lookupvar('add_field').size - 1) -%>
+<% end -%>
+<% end -%>
+<% elsif scope.lookupvar('add_field').is_a?(String) -%>
+add_field: <%= scope.lookupvar('add_field') %>
+<% end %>
+<% if scope.lookupvar('exclude') != '' -%>
+exclude: <%= scope.lookupvar('exclude') %>
+<% end -%>
 <% if scope.lookupvar('format') != '' -%>
 format: <%= scope.lookupvar('format') %>
 <% end -%>

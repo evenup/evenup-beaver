@@ -14,6 +14,13 @@
 #   String/Array of strings.  What tags should be added to this stream and
 #   passed back to logstash
 #
+# [*add_field*]
+#   String/Array of arrays of strings. Custom fields that should be added.
+#   Example: [ ['app','app-name'], ['env', 'stage'] ]
+#
+# [*exclude*]
+#   String. Regex to match files that should be left out. eg: .gz$
+#
 # [*redis_url*]
 #   String.  Redis connection url to use for this specific log stream
 #
@@ -27,7 +34,7 @@
 #
 # [*sincedb_write_interval*]
 #   Integer.  Number of seconds between sincedb write updates
-#   Default: 3
+#   Default: 300
 #
 #
 # === Authors
@@ -43,6 +50,8 @@ define beaver::stanza (
   $type,
   $source                 = '',
   $tags                   = [],
+  $add_field              = [],
+  $exclude                = '',
   $redis_url              = '',
   $redis_namespace        = '',
   $format                 = '',

@@ -22,7 +22,7 @@ beaver defaults work for you or if you are using puppet >= 3.0 with hiera:
 If beaver configuration is required, just specify it in the class:
 <pre>
   class { 'beaver':
-    redis_host      => 'logstash.example.org',
+    redis_url       => 'redis://logstash:6379/0',
     redis_namespace => 'logstash::prod'
   }
 </pre>

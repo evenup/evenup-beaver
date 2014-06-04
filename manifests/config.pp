@@ -19,11 +19,11 @@ class beaver::config {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  file { '/etc/beaver.conf':
+  file { '/etc/beaver/beaver.conf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0444',
+    mode    => '0744',
     content => template('beaver/beaver.conf.erb'),
     notify  => Class['beaver::service']
   }
