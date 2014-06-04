@@ -79,6 +79,7 @@ class beaver (
   $multiline_regex_after  = $beaver::params::multiline_regex_after,
   $multiline_regex_before = $beaver::params::multiline_regex_before,
   $queue_timeout          = $beaver::params::queue_timeout,
+  $discover_interval      = $beaver::params::discover_interval,
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)

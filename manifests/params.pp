@@ -24,5 +24,6 @@ class beaver::params {
   $sincedb_path           = '/tmp/beaver_since.db'
   $multiline_regex_after  = ''
   $multiline_regex_before = ''
-  $queue_timeout          = '60'
+  $queue_timeout          = 60
+  $discover_interval      = 1
 }

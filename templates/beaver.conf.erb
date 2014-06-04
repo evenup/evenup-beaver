@@ -15,4 +15,7 @@ multiline_regex_after: <%= scope.lookupvar('beaver::multiline_regex_after') %>
 <% if scope.lookupvar('beaver::queue_timeout') != '' -%>
 queue_timeout: <%= scope.lookupvar('beaver::queue_timeout') %>
 <% end -%>
+<% if scope.lookupvar('beaver::discover_interval') != '' -%>
+discover_interval: <%= scope.lookupvar('beaver::discover_interval') %>
+<% end -%>
 
