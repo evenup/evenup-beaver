@@ -23,7 +23,7 @@ class beaver::config {
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0444',
+    mode    => '0744',
     content => template('beaver/beaver.conf.erb'),
     notify  => Class['beaver::service']
   }

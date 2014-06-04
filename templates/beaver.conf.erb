@@ -12,3 +12,7 @@ multiline_regex_before: <%= scope.lookupvar('beaver::multiline_regex_before') %>
 <% if scope.lookupvar('beaver::multiline_regex_after') != '' -%>
 multiline_regex_after: <%= scope.lookupvar('beaver::multiline_regex_after') %>
 <% end -%>
+<% if scope.lookupvar('beaver::queue_timeout') != '' -%>
+queue_timeout: <%= scope.lookupvar('beaver::queue_timeout') %>
+<% end -%>
+
