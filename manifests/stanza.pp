@@ -15,7 +15,8 @@
 #   passed back to logstash
 #
 # [*add_field*]
-#   String/Array of strings. 
+#   String/Array of arrays of strings. Custom fields that should be added.
+#   Example: [ ['app','app-name'], ['env', 'stage'] ]
 #
 # [*exclude*]
 #   String. Regex to match files that should be left out. eg: .gz$
@@ -33,7 +34,7 @@
 #
 # [*sincedb_write_interval*]
 #   Integer.  Number of seconds between sincedb write updates
-#   Default: 3
+#   Default: 300
 #
 #
 # === Authors

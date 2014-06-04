@@ -39,13 +39,17 @@
 #
 # [*sincedb_path*]
 #   String.  Location for sincedb sqlite3 database.  Beaver needs rw to this location
-#   Default: /tmp/beaver
+#   Default: /tmp/beaver.sqlite3
 #
 # [*multiline_regex_after*]
 #   String.   If a line match this regular expression, it will be merged with next line(s)
 #
 # [*multiline_regex_before*]
 #   String.   If a line match this regular expression, it will be merged with previous line(s).
+#
+# [*queue_timeout*]
+#   Integer or String.  Seconds before timeout.
+#   Default: 60
 #
 # === Examples
 #
