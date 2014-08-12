@@ -31,7 +31,7 @@ class beaver::service {
   }
 
   service { 'beaver':
-    ensure  => $ensure_real,
-    enable  => $enable_real,
+    ensure => $ensure_real,
+    enable => $enable_real,
   }
 }
