@@ -17,6 +17,26 @@
 #   String.  Package provider for beaver
 #   Default: pip
 #
+# [*python_version*]
+#   String: Version of python for virtualenv
+#   Default: 2.7
+#
+# [*home*]
+#   String: Home directory for the virtualenv user
+#   Default: /home/beaver
+#
+# [*venv*]
+#   String: Directory target for the virtualenv
+#   Default: ${home}/venv
+#
+# [*user*]
+#   String: User to install/run in virtualenv
+#   Default: beaver
+#
+# [*group*]
+#   String: Group to install/run in virtualenv
+#   Default: beaver
+#
 # [*version*]
 #   String.  What version of beaver to install
 #   Default: installed
@@ -74,6 +94,11 @@ class beaver (
   $enable                 = $beaver::params::enable,
   $package_name           = $beaver::params::package_name,
   $package_provider       = $beaver::params::package_provider,
+  $python_version         = $beaver::params::python_version,
+  $home                   = $beaver::params::home,
+  $venv                   = $beaver::params::venv,
+  $user                   = $beaver::params::user,
+  $group                  = $beaver::params::group,
   $version                = $beaver::params::version,
   $redis_host             = $beaver::params::redis_host,
   $redis_db               = $beaver::params::redis_db,

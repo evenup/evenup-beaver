@@ -14,8 +14,13 @@
 #
 class beaver::params {
   $enable                 = true
+  $user                   = 'beaver'
+  $group                  = 'beaver'
+  $home                   = '/home/beaver'
+  $venv                   = "${home}/venv"
   $package_name           = 'beaver'
   $package_provider       = 'pip'
+  $python_version         = '2.7'
   $version                = 'installed'
   $redis_host             = 'localhost'
   $redis_db               = 0

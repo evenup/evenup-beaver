@@ -29,6 +29,9 @@
 #   Integer.  Number of seconds between sincedb write updates
 #   Default: 3
 #
+# [*exlcude*]
+#   String/Array of strings.  Valid python regex strings to exlude
+#   from file globs.
 #
 # === Authors
 #
