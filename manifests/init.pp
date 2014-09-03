@@ -17,6 +17,26 @@
 #   String.  Package provider for beaver
 #   Default: pip
 #
+# [*python_version*]
+#   String: Version of python for virtualenv
+#   Default: 2.7
+#
+# [*home*]
+#   String: Home directory for the virtualenv user
+#   Default: /home/beaver
+#
+# [*venv*]
+#   String: Directory target for the virtualenv
+#   Default: ${home}/venv
+#
+# [*user*]
+#   String: User to install/run in virtualenv
+#   Default: beaver
+#
+# [*group*]
+#   String: Group to install/run in virtualenv
+#   Default: beaver
+#
 # [*version*]
 #   String.  What version of beaver to install
 #   Default: installed
@@ -36,6 +56,10 @@
 # [*redis_namespace*]
 #   String.  Default namespace beaver should write logs to
 #   Default:  logstash::beaver
+#
+# [*queue_timeout*]
+#   Integer. Timeout value for active queues.
+#   Default: 60
 #
 # [*logstash_version*]
 #   Integer.  Pre-1.2 (0) or 1.2+ logstash (1)?
@@ -74,11 +98,17 @@ class beaver (
   $enable                 = $beaver::params::enable,
   $package_name           = $beaver::params::package_name,
   $package_provider       = $beaver::params::package_provider,
+  $python_version         = $beaver::params::python_version,
+  $home                   = $beaver::params::home,
+  $venv                   = $beaver::params::venv,
+  $user                   = $beaver::params::user,
+  $group                  = $beaver::params::group,
   $version                = $beaver::params::version,
   $redis_host             = $beaver::params::redis_host,
   $redis_db               = $beaver::params::redis_db,
   $redis_port             = $beaver::params::redis_port,
   $redis_namespace        = $beaver::params::redis_namespace,
+  $queue_timeout          = $beaver::params::queue_timeout,
   $logstash_version       = $beaver::params::logstash_version,
   $enable_sincedb         = $beaver::params::enable_sincedb,
   $sincedb_path           = $beaver::params::sincedb_path,
