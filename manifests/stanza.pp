@@ -29,6 +29,9 @@
 #   Integer.  Number of seconds between sincedb write updates
 #   Default: 3
 #
+# [*exlcude*]
+#   String/Array of strings.  Valid python regex strings to exlude
+#   from file globs.
 #
 # === Authors
 #
@@ -46,6 +49,7 @@ define beaver::stanza (
   $redis_url              = '',
   $redis_namespace        = '',
   $format                 = '',
+  $exclude                = [],
   $sincedb_write_interval = 300,
 ){
 

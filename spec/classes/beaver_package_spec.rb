@@ -21,6 +21,21 @@ describe 'beaver' do
 
       it { should contain_package('python-beaver').with(:ensure => 'latest', :provider => 'yum') }
     end
+    
+    context 'set provider option' do
+      let(:params) do {
+	:package_provider => 'virtualenv',
+	:package_name     => 'beaver',
+	:venv             => '/home/beaver/venv',
+	:user             => 'beaver',
+	:group            => 'beaver',
+	:python_version   => '2.7'
+      } end
+
+      it { should contain_python__virtualenv('/home/beaver/venv') }
+      it { should contain_python__pip('beaver') }
+      it { should contain_user('beaver') }
+    end
 
   end
 

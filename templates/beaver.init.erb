@@ -17,12 +17,19 @@
 # Source function library.
 . /etc/init.d/functions
 
+<% if @provider == 'virtualenv' %>
+# Activate the venv after other functions
+  <% @venv_environment.each do |line| -%>
+     <%= line %>
+  <% end -%>
+<% end -%>
+
 RETVAL=0
 PIDFILE=/var/run/beaver.pid
 LOGFILE=/var/log/beaver.log
 
 prog=beaver
-exec=/usr/bin/beaver
+exec=beaver
 lockfile=/var/lock/subsys/$prog
 
 # Source config
@@ -33,7 +40,7 @@ fi
 BEAVER_CONFIG=${BEAVER_CONFIG:-/etc/beaver.conf}
 
 start() {
-    [ -x $exec ] || exit 5
+    /usr/bin/which beaver 2>&1 > /dev/null || exit 5
     [ -f $BEAVER_CONFIG ] || exit 7
 
     umask 077
