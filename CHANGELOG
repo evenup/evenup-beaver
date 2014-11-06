@@ -1,3 +1,7 @@
+20141106 - v1.2.0
+  Add virtualenv support (dansajner)
+20140610 - v1.1.0
+  Testing updates
 20140114 - v1.0.0
   Rewrite to use conf.d style config (beaver 29 required)
   Support logstash version (beaver 31)
