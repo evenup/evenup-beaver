@@ -114,7 +114,6 @@ class beaver (
   $sincedb_path           = $beaver::params::sincedb_path,
   $multiline_regex_after  = $beaver::params::multiline_regex_after,
   $multiline_regex_before = $beaver::params::multiline_regex_before,
-  $stanzas                = $beaver::params::stanzas
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
@@ -124,12 +123,6 @@ class beaver (
     fail("logstash_version must be 0 or 1, got ${logstash_version}")
   }
   validate_string($redis_host, $redis_namespace)
-
-  $hiera_config = hiera_hash('beaver::stanzas', undef)
-  if $hiera_config {
-    create_resources(beaver::stanza, $hiera_config)
-  }
-  
 
   class { 'beaver::package': } ->
   class { 'beaver::config': } ~>

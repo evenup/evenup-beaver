@@ -38,10 +38,12 @@ classes:
 
 beaver::stanzas:
   /var/log/messages:
-     type: 'syslog',
-     tags: ['messages', 'prod' ]
+     type: 'tomcat'
+     tags:
+      - 'messages'
+      - 'prod'
 
-beaver::redis_host: 'iipc-ulog01'
+beaver::redis_host: 'redis-host.domain'
 beaver::redis_namespace: 'logstash'
 beaver::logstash_version: '1'
 ```
