@@ -1,0 +1,23 @@
+{
+  "author": "Justin Lambert \u003cjlambert@letsevenup.com\u003e",
+  "dependencies": [
+    {
+      "name": "stankevich/python",
+      "version_requirement": "\u003e\u003d 1.7.5"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "\u003e\u003d 4.1.0"
+    }
+  ],
+  "description": "Installs, configures, and runs the beaver service to ship logfile to logstash.",
+  "license": "Apache",
+  "name": "evenup-beaver",
+  "operatingsystem_support": [],
+  "project_page": "",
+  "requirements": [],
+  "source": "https://github.com/evenup/evenup-beaver",
+  "summary": "Manages beaver.",
+  "tags": [],
+  "version": "1.2.0"
+}
