@@ -11,13 +11,15 @@ Usage:
 ------
 
 You an install the module by just defining a logfile you'd like to ship if the
-beaver defaults work for you or if you are using puppet >= 3.0 with hiera:
+beaver defaults work for you.
+
+### Example configuration with manifests
 <pre>
   beaver::stanza { '/var/log/messages':
     type    => 'syslog',
     tags    => ['messages', 'prod'],
   }
-</pre>
+</pre> 
 
 If beaver configuration is required, just specify it in the class:
 <pre>
@@ -26,6 +28,26 @@ If beaver configuration is required, just specify it in the class:
     redis_namespace => 'logstash::prod'
   }
 </pre>
+
+### Example configuration with hiera
+Here it is assumed that the classes are loaded from hiera automatically [(more info on puppetlabs)](https://docs.puppetlabs.com/hiera/1/puppet.html#assigning-classes-to-nodes-with-hiera-hierainclude).
+```
+---
+classes:
+  - beaver
+  - beaver::stanzas
+
+beaver::stanzas:
+  /var/log/messages:
+     type: 'tomcat'
+     tags:
+      - 'messages'
+      - 'prod'
+
+beaver::redis_host: 'redis-host.domain'
+beaver::redis_namespace: 'logstash'
+beaver::logstash_version: '1'
+```
 
 TODO:
 -----
