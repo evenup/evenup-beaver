@@ -35,6 +35,7 @@ Here it is assumed that the classes are loaded from hiera automatically [(more i
 ---
 classes:
   - beaver
+  - beaver::stanzas
 
 beaver::stanzas:
   /var/log/messages:

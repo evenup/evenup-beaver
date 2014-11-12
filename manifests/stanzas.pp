@@ -1,6 +1,6 @@
 # == Class: beaver::stanzas
 #
-# This class installs can be included to load stanzas from hiera
+# This class can be included to load stanzas from hiera
 #
 #
 # === Authors
