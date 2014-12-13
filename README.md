@@ -2,7 +2,7 @@ What is it?
 ===========
 
 Puppet module install and configure [beaver](https://github.com/josegonzalez/beaver) for shipping logs to logstash.
-Currently only redis is supported as the transport, but it would be easy to 
+Currently only redis is supported as the transport, but it would be easy to
 support additional transports.
 
 Note: Beaver 29 or greater is now required because of the switch to conf.d style config
@@ -31,6 +31,7 @@ TODO:
 -----
 [] Support additional transports
 [] Support adding environment fields
+[] Add init file for Ubuntu systems
 
 License:
 --------
