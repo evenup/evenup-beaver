@@ -117,8 +117,8 @@ class beaver (
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
-  if type($redis_db) != 'integer' { fail('redis_db is not an integer') }
-  if type($redis_port) != 'integer' { fail('redis_port is not an integer') }
+  if ! is_integer($redis_db) { fail('redis_db is not an integer') }
+  if ! is_integer($redis_port) { fail('redis_port is not an integer') }
   if $logstash_version > 1 {
     fail("logstash_version must be 0 or 1, got ${logstash_version}")
   }
