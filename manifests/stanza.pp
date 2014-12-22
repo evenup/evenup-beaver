@@ -59,7 +59,7 @@ define beaver::stanza (
   }
 
   validate_string($type, $source, $source_real)
-  if type($sincedb_write_interval) != 'integer' { fail('sincedb_write_interval is not an integer') }
+  if ! is_integer($sincedb_write_interval) { fail('sincedb_write_interval is not an integer') }
 
   include beaver
   Class['beaver::package'] ->
