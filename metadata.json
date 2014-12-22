@@ -2,7 +2,7 @@
   "name": "evenup-beaver",
   "version": "1.2.0",
   "author": "Justin Lambert <jlambert@letsevenup.com>",
-  "license": "Licensed under Apache 2.0",
+  "license": "Apache 2.0",
   "summary": "Manages the beaver package, service and configuration to ship logfiles to logstash",
   "source": "https://github.com/evenup/evenup-beaver",
   "project_page": "https://github.com/evenup/evenup-beaver",
