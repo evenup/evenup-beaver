@@ -1,3 +1,6 @@
+20150105 - v1.3.0
+  Add acceptance tests
+  Fixes for future parser
 20141106 - v1.2.0
   Add virtualenv support (dansajner)
 20140610 - v1.1.0
