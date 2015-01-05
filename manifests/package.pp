@@ -12,11 +12,6 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2013 EvenUp.
-#
 class beaver::package (
   $venv           = $beaver::venv,
   $package_name   = $beaver::package_name,
