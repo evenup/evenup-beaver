@@ -40,7 +40,7 @@ class beaver::package (
       owner   => $user,
       group   => $group,
       require => Class['python'],
-    } 
+    }
 
     python::pip { $package_name:
       ensure       => present,
@@ -58,14 +58,14 @@ class beaver::package (
       managehome => true,
       system     => true,
     }
-  } elsif $provider == 'pip'{
+  } elsif $provider == 'pip' {
     python::pip { $package_name:
-      ensure       => present,
-      pkgname      => $package_name,
-      virtualenv   => 'system',
-      owner        => 'root',
-      require      => User[$user],
-      notify       => Class['beaver::service'],
+      ensure     => present,
+      pkgname    => $package_name,
+      virtualenv => 'system',
+      owner      => 'root',
+      require    => User[$user],
+      notify     => Class['beaver::service'],
     }
     
     user { $user:
