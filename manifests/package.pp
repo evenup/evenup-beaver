@@ -35,12 +35,12 @@ class beaver::package (
 
   if $provider == 'virtualenv' {
     python::virtualenv { $venv:
-      ensure  => present,
-      version => $python_version,
-      owner   => $user,
-      group   => $group,
+	    ensure  => present,
+	    version => $python_version,
+	    owner   => $user,
+	    group   => $group,
       require => Class['python'],
-    }
+    } 
 
     python::pip { $package_name:
       ensure       => present,
@@ -52,6 +52,22 @@ class beaver::package (
       notify       => Class['beaver::service'],
     }
 
+    user { $user:
+      ensure     => present,
+      home       => $home,
+      managehome => true,
+      system     => true,
+    }
+  } elsif $provider == 'pip'{
+    python::pip { $package_name:
+      ensure       => present,
+      pkgname      => $package_name,
+      virtualenv   => 'system',
+      owner        => 'root',
+      require      => User[$user],
+      notify       => Class['beaver::service'],
+    }
+    
     user { $user:
       ensure     => present,
       home       => $home,
