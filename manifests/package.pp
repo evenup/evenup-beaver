@@ -35,10 +35,10 @@ class beaver::package (
 
   if $provider == 'virtualenv' {
     python::virtualenv { $venv:
-	    ensure  => present,
-	    version => $python_version,
-	    owner   => $user,
-	    group   => $group,
+      ensure  => present,
+      version => $python_version,
+      owner   => $user,
+      group   => $group,
       require => Class['python'],
     } 
 
