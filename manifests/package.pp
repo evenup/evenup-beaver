@@ -58,6 +58,22 @@ class beaver::package (
       managehome => true,
       system     => true,
     }
+  } elsif $provider == 'pip' {
+    python::pip { $package_name:
+      ensure     => present,
+      pkgname    => $package_name,
+      virtualenv => 'system',
+      owner      => 'root',
+      require    => User[$user],
+      notify     => Class['beaver::service'],
+    }
+    
+    user { $user:
+      ensure     => present,
+      home       => $home,
+      managehome => true,
+      system     => true,
+    }
   } else {
     package { $package_name:
       ensure   => $version,
