@@ -7,9 +7,9 @@ logstash_version: <%= scope.lookupvar('beaver::logstash_version') %>
 <% if scope.lookupvar('beaver::enable_sincedb') -%>
 sincedb_path: <%= scope.lookupvar('beaver::sincedb_path') %>
 <% end -%>
-<% if scope.lookupvar('beaver::multiline_regex_before') != '' -%>
-multiline_regex_before: <%= scope.lookupvar('beaver::multiline_regex_before') %>
+<% if @multiline_regex_before -%>
+multiline_regex_before: <%= @multiline_regex_before %>
 <% end -%>
-<% if scope.lookupvar('beaver::multiline_regex_after') != '' -%>
-multiline_regex_after: <%= scope.lookupvar('beaver::multiline_regex_after') %>
+<% if @multiline_regex_after -%>
+multiline_regex_after: <%= @multiline_regex_after %>
 <% end -%>
