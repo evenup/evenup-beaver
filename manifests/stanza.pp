@@ -39,24 +39,25 @@
 #
 define beaver::stanza (
   $type,
-  $source                 = '',
+  $source                 = undef,
   $tags                   = [],
-  $redis_url              = '',
-  $redis_namespace        = '',
-  $format                 = '',
+  $redis_url              = undef,
+  $redis_namespace        = undef,
+  $format                 = undef,
   $exclude                = [],
   $sincedb_write_interval = 300,
 ){
 
-  $source_real = $source ? {
-    ''      => $name,
-    default => $source,
+  if $source {
+    $source_real = $source
+  } else {
+    $source_real = $name
   }
 
-  validate_string($type, $source, $source_real)
+  validate_string($type, $source_real)
   if ! is_integer($sincedb_write_interval) { fail('sincedb_write_interval is not an integer') }
 
-  include beaver
+  include ::beaver
   Class['beaver::package'] ->
   Beaver::Stanza[$name] ~>
   Class['beaver::service']

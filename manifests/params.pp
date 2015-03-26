@@ -25,6 +25,6 @@ class beaver::params {
   $logstash_version       = 0
   $enable_sincedb         = true
   $sincedb_path           = '/tmp/beaver_since.db'
-  $multiline_regex_after  = ''
-  $multiline_regex_before = ''
+  $multiline_regex_after  = undef
+  $multiline_regex_before = undef
 }

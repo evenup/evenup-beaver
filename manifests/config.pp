@@ -8,7 +8,10 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-class beaver::config {
+class beaver::config (
+  $multiline_regex_before = $::beaver::multiline_regex_before,
+  $multline_regex_after   = $::beaver::multiline_regex_after,
+){
 
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
@@ -20,7 +23,7 @@ class beaver::config {
     group   => 'root',
     mode    => '0444',
     content => template('beaver/beaver.conf.erb'),
-    notify  => Class['beaver::service']
+    notify  => Class['beaver::service'],
   }
 
 }
