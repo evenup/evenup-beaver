@@ -114,7 +114,7 @@ class beaver (
   validate_bool($enable, $enable_sincedb)
   if ! is_integer($redis_db) { fail('redis_db is not an integer') }
   if ! is_integer($redis_port) { fail('redis_port is not an integer') }
-  if versioncmp($logstash_version, '1') >= 0 {
+  if !member([0,1], $logstash_version) {
     fail("logstash_version must be 0 or 1, got ${logstash_version}")
   }
   validate_string($redis_host, $redis_namespace)
