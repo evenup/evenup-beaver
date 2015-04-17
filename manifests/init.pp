@@ -61,10 +61,6 @@
 #   Integer. Timeout value for active queues.
 #   Default: 60
 #
-# [*logstash_version*]
-#   Integer.  Pre-1.2 (0) or 1.2+ logstash (1)?
-#   Default: 0
-#
 # [*enable_sincedb*]
 #   Boolean.  Whether or not sincedb tracking should be enabled
 #   Default: true
@@ -104,7 +100,6 @@ class beaver (
   $redis_port             = $beaver::params::redis_port,
   $redis_namespace        = $beaver::params::redis_namespace,
   $queue_timeout          = $beaver::params::queue_timeout,
-  $logstash_version       = $beaver::params::logstash_version,
   $enable_sincedb         = $beaver::params::enable_sincedb,
   $sincedb_path           = $beaver::params::sincedb_path,
   $multiline_regex_after  = $beaver::params::multiline_regex_after,
@@ -114,9 +109,6 @@ class beaver (
   validate_bool($enable, $enable_sincedb)
   if ! is_integer($redis_db) { fail('redis_db is not an integer') }
   if ! is_integer($redis_port) { fail('redis_port is not an integer') }
-  if !member([0,1], $logstash_version) {
-    fail("logstash_version must be 0 or 1, got ${logstash_version}")
-  }
   validate_string($redis_host, $redis_namespace)
 
   class { '::beaver::package': } ->
