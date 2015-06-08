@@ -17,6 +17,8 @@ class beaver::config (
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
+  create_resources('beaver::stanza', $beaver::stanzas)
+
   file { '/etc/beaver.conf':
     ensure  => 'file',
     owner   => 'root',
