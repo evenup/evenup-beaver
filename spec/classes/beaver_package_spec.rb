@@ -8,7 +8,7 @@ describe 'beaver' do
     it { should contain_class('beaver::package') }
 
     context 'default' do
-      it { should contain_package('beaver').with(:ensure => 'installed', :provider => 'pip') }
+      it { should contain_package('beaver').with(:ensure => 'present', :provider => 'pip') }
       it { should contain_file('/etc/init.d/beaver') }
       it { should contain_file('/etc/beaver/conf.d').with_ensure('directory') }
     end
