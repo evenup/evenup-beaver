@@ -23,6 +23,16 @@ describe 'beaver' do
       it { should contain_package('python-beaver').with(:ensure => 'latest', :provider => 'yum') }
     end
 
+    context 'specify version with pip provider' do
+      let(:params) do {
+        :package_name     => 'beaver',
+        :package_provider => 'pip',
+        :version          => '33.3.0'
+      } end
+
+      it { should contain_package('beaver').with(:ensure => '33.3.0', :provider => 'pip') }
+    end
+
     context 'set provider option' do
       let(:params) do {
         :package_provider => 'virtualenv',
