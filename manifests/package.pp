@@ -43,7 +43,7 @@ class beaver::package (
     }
 
     python::pip { $package_name:
-      ensure       => present,
+      ensure       => $version,
       pkgname      => $package_name,
       virtualenv   => $venv,
       install_args => "--download-cache ${venv}/.pip-cache",

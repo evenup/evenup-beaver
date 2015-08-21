@@ -8,7 +8,7 @@ describe 'beaver' do
     it { should contain_class('beaver::package') }
 
     context 'default' do
-      it { should contain_package('beaver').with(:ensure => 'installed', :provider => 'pip') }
+      it { should contain_package('beaver').with(:ensure => 'present', :provider => 'pip') }
       it { should contain_file('/etc/init.d/beaver') }
       it { should contain_file('/etc/beaver/conf.d').with_ensure('directory') }
     end
@@ -21,6 +21,16 @@ describe 'beaver' do
       } end
 
       it { should contain_package('python-beaver').with(:ensure => 'latest', :provider => 'yum') }
+    end
+
+    context 'specify version with pip provider' do
+      let(:params) do {
+        :package_name     => 'beaver',
+        :package_provider => 'pip',
+        :version          => '33.3.0'
+      } end
+
+      it { should contain_package('beaver').with(:ensure => '33.3.0', :provider => 'pip') }
     end
 
     context 'set provider option' do
