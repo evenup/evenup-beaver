@@ -66,6 +66,13 @@ class beaver::package (
     }
   }
 
+  file { '/lib/systemd/system/beaver.service':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    content => template('beaver/beaver.service.erb'),
+  }
+
   file { '/etc/init.d/beaver':
     ensure  => file,
     mode    => '0555',
