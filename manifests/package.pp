@@ -35,7 +35,7 @@ class beaver::package (
 
   if $provider == 'pip' {
     class { 'python':
-      pip             => 'present',
+      pip             => true,
       manage_gunicorn => false
     }
   }
@@ -43,8 +43,8 @@ class beaver::package (
   if $provider == 'virtualenv' {
     # Installs python pip/virtualenv.
     class { 'python':
-      pip             => 'present',
-      virtualenv      => 'present',
+      pip             => true,
+      virtualenv      => true,
       manage_gunicorn => false
     }
 
