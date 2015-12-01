@@ -6,6 +6,9 @@ fixtures:
     stdlib:
       repo: "puppetlabs/stdlib"
       ref: "4.5.0"
+    systemd:
+      repo: "camptocamp/systemd"
+      ref: "0.1.7"
   symlinks:
     beaver: "#{source_dir}"
 

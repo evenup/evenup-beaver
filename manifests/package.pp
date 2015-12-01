@@ -76,12 +76,15 @@ class beaver::package (
       content => template('beaver/beaver.init.erb'),
     }
   } else {
+    include ::systemd
+    
     file { '/lib/systemd/system/beaver.service':
       ensure  => file,
       owner   => 'root',
       group   => 'root',
       content => template('beaver/beaver.service.erb'),
-    }
+    } ~>
+    Exec['systemctl-daemon-reload']
   }
 
   file { '/etc/beaver':

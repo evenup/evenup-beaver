@@ -27,7 +27,7 @@ class beaver::config (
   }
 
   file { '/etc/beaver.conf':
-    ensure => absent
+    ensure => absent,
   }
 
 }
