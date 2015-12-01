@@ -104,6 +104,7 @@ class beaver (
   $sincedb_path           = $beaver::params::sincedb_path,
   $multiline_regex_after  = $beaver::params::multiline_regex_after,
   $multiline_regex_before = $beaver::params::multiline_regex_before,
+  $stanzas                = {},
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
@@ -112,8 +113,10 @@ class beaver (
   validate_string($redis_host, $redis_namespace)
 
   class { '::beaver::package': } ->
-  class { '::beaver::config': } ~>
-  class { '::beaver::service': } ->
-  Class['beaver']
+  class { '::beaver::config': } ->
+  class { '::beaver::stanzas': } ~>
+  class { '::beaver::service': }
+  Class['::Beaver::Package'] ~> Class['::Beaver::Service']
+  Class['::Beaver::Config'] ~> Class['::Beaver::Service']
 
 }
