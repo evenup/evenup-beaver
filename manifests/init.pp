@@ -75,6 +75,9 @@
 # [*multiline_regex_before*]
 #   String.   If a line match this regular expression, it will be merged with previous line(s).
 #
+# [*stanzas*]
+# [*service_provider*]
+#
 # === Examples
 #
 # * Installation:
@@ -86,25 +89,26 @@
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
 class beaver (
-  $enable                 = $beaver::params::enable,
-  $package_name           = $beaver::params::package_name,
-  $package_provider       = $beaver::params::package_provider,
-  $python_version         = $beaver::params::python_version,
-  $home                   = $beaver::params::home,
-  $venv                   = $beaver::params::venv,
-  $user                   = $beaver::params::user,
-  $group                  = $beaver::params::group,
-  $version                = $beaver::params::version,
-  $redis_host             = $beaver::params::redis_host,
-  $redis_db               = $beaver::params::redis_db,
-  $redis_port             = $beaver::params::redis_port,
-  $redis_namespace        = $beaver::params::redis_namespace,
-  $queue_timeout          = $beaver::params::queue_timeout,
-  $enable_sincedb         = $beaver::params::enable_sincedb,
-  $sincedb_path           = $beaver::params::sincedb_path,
-  $multiline_regex_after  = $beaver::params::multiline_regex_after,
-  $multiline_regex_before = $beaver::params::multiline_regex_before,
-  $stanzas                = {},
+  $enable                 = $::beaver::params::enable,
+  $package_name           = $::beaver::params::package_name,
+  $package_provider       = $::beaver::params::package_provider,
+  $service_provider       = $::beaver::params::service_provider,
+  $python_version         = $::beaver::params::python_version,
+  $home                   = $::beaver::params::home,
+  $venv                   = $::beaver::params::venv,
+  $user                   = $::beaver::params::user,
+  $group                  = $::beaver::params::group,
+  $version                = $::beaver::params::version,
+  $redis_host             = $::beaver::params::redis_host,
+  $redis_db               = $::beaver::params::redis_db,
+  $redis_port             = $::beaver::params::redis_port,
+  $redis_namespace        = $::beaver::params::redis_namespace,
+  $queue_timeout          = $::beaver::params::queue_timeout,
+  $enable_sincedb         = $::beaver::params::enable_sincedb,
+  $sincedb_path           = $::beaver::params::sincedb_path,
+  $multiline_regex_after  = $::beaver::params::multiline_regex_after,
+  $multiline_regex_before = $::beaver::params::multiline_regex_before,
+  $stanzas                = $::beaver::params::stanzas,
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
