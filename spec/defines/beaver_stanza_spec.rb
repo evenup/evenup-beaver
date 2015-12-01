@@ -53,4 +53,12 @@ describe 'beaver::stanza', :type => :define do
     it { should contain_file('/etc/beaver/conf.d/_var_log_messages').with_content(/^sincedb_write_interval:\s+10$/) }
   end
 
+  context 'filename regex' do
+    let(:title) {'/var/log/messages:*.log'}
+    let(:params) { {
+      :type => 'json'
+    } }
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages__.log') }
+  end
+
 end

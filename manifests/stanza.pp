@@ -62,7 +62,7 @@ define beaver::stanza (
   Beaver::Stanza[$name] ~>
   Class['beaver::service']
 
-  $filename = regsubst($name, '[/:\n]', '_', 'GM')
+  $filename = regsubst($name, '[/:\n\*]', '_', 'GM')
   file { "/etc/beaver/conf.d/${filename}":
     ensure  => 'file',
     owner   => 'root',
