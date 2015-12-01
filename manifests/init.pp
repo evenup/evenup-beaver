@@ -104,6 +104,7 @@ class beaver (
   $sincedb_path           = $beaver::params::sincedb_path,
   $multiline_regex_after  = $beaver::params::multiline_regex_after,
   $multiline_regex_before = $beaver::params::multiline_regex_before,
+  $stanzas                = {}
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
