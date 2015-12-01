@@ -17,6 +17,9 @@
 #   String.  Package provider for beaver
 #   Default: pip
 #
+# [*service_provider*]
+#   String.  What service provider to use for this machine.  Determined by os/version
+#
 # [*python_version*]
 #   String: Version of python for virtualenv
 #   Default: 2.7
@@ -76,7 +79,8 @@
 #   String.   If a line match this regular expression, it will be merged with previous line(s).
 #
 # [*stanzas*]
-# [*service_provider*]
+#   Hash.  Structure matches parameters from beaver::stanza
+#
 #
 # === Examples
 #

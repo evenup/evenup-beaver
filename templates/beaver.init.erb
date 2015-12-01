@@ -37,7 +37,7 @@ if [ -f /etc/sysconfig/$prog ] ; then
     . /etc/sysconfig/$prog
 fi
 
-BEAVER_CONFIG=${BEAVER_CONFIG:-/etc/beaver.conf}
+BEAVER_CONFIG=${BEAVER_CONFIG:-/etc/beaver/beaver.conf}
 
 start() {
     /usr/bin/which beaver 2>&1 > /dev/null || exit 5
