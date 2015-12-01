@@ -1,6 +1,6 @@
 {
   "name": "evenup-beaver",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Justin Lambert <jlambert@letsevenup.com>",
   "license": "Apache-2.0",
   "summary": "Manages the beaver package, service and configuration to ship logfiles to logstash",
