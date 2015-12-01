@@ -33,7 +33,21 @@ class beaver::package (
     "VIRTUAL_ENV=${venv}",
   ]
 
+  if $provider == 'pip' {
+    class { 'python':
+      pip             => true,
+      manage_gunicorn => false
+    }
+  }
+
   if $provider == 'virtualenv' {
+    # Installs python pip/virtualenv.
+    class { 'python':
+      pip             => true,
+      virtualenv      => true,
+      manage_gunicorn => false
+    }
+
     python::virtualenv { $venv:
       ensure  => present,
       version => $python_version,
@@ -62,8 +76,16 @@ class beaver::package (
     package { $package_name:
       ensure   => $version,
       provider => $provider,
+      require  => Class['python'],
       notify   => Class['beaver::service'],
     }
+  }
+
+  file { '/lib/systemd/system/beaver.service':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    content => template('beaver/beaver.service.erb'),
   }
 
   file { '/etc/init.d/beaver':
