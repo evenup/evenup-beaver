@@ -2,6 +2,6 @@
 Description=Beaver log muncher for logstash
 
 [Service]
-ExecStart=/usr/local/bin/beaver -c /etc/beaver.conf -t redis $BEAVER_OPTIONS
+ExecStart=/usr/local/bin/beaver -c /etc/beaver/beaver.conf -t redis $BEAVER_OPTIONS
 Restart=on-failure
 KillMode=process
