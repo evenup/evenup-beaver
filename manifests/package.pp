@@ -13,14 +13,15 @@
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
 class beaver::package (
-  $venv           = $beaver::venv,
-  $package_name   = $beaver::package_name,
-  $provider       = $beaver::package_provider,
-  $python_version = $beaver::python_version,
-  $version        = $beaver::version,
-  $user           = $beaver::user,
-  $group          = $beaver::group,
-  $home           = $beaver::home,
+  $venv             = $::beaver::venv,
+  $package_name     = $::beaver::package_name,
+  $provider         = $::beaver::package_provider,
+  $python_version   = $::beaver::python_version,
+  $version          = $::beaver::version,
+  $user             = $::beaver::user,
+  $group            = $::beaver::group,
+  $home             = $::beaver::home,
+  $service_provider = $::beaver::service_provider,
 ) {
 
   if $caller_module_name != $module_name {
@@ -66,12 +67,21 @@ class beaver::package (
     }
   }
 
-  file { '/etc/init.d/beaver':
-    ensure  => file,
-    mode    => '0555',
-    owner   => 'root',
-    group   => 'root',
-    content => template('beaver/beaver.init.erb'),
+  if $service_provider == 'init' {
+    file { '/etc/init.d/beaver':
+      ensure  => file,
+      mode    => '0555',
+      owner   => 'root',
+      group   => 'root',
+      content => template('beaver/beaver.init.erb'),
+    }
+  } else {
+    file { '/lib/systemd/system/beaver.service':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      content => template('beaver/beaver.service.erb'),
+    }
   }
 
   file { '/etc/beaver':

@@ -26,4 +26,35 @@ class beaver::params {
   $sincedb_path           = '/tmp/beaver_since.db'
   $multiline_regex_after  = undef
   $multiline_regex_before = undef
+  $stanzas                = {}
+
+  case $::operatingsystem {
+    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon', 'OracleLinux', 'SLC': {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
+        $service_provider     = 'systemd'
+      } else {
+        $service_provider     = 'init'
+      }
+    }
+
+    'Debian': {
+      if versioncmp($::operatingsystemmajrelease, '8') >= 0 {
+        $service_provider = 'systemd'
+      } else {
+        $service_provider = 'init'
+      }
+    }
+
+    'Ubuntu': {
+      if versioncmp($::operatingsystemmajrelease, '15') >= 0 {
+        $service_provider = 'systemd'
+      } else {
+        $service_provider = 'init'
+      }
+    }
+
+    default: {
+      $service_provider     = 'systemd'
+    }
+  }
 }
