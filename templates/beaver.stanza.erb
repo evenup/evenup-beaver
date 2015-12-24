@@ -17,11 +17,3 @@ format: <%= scope.lookupvar('format') %>
 <% if scope.lookupvar('beaver::enable_sincedb') -%>
 sincedb_write_interval: <%= scope.lookupvar('sincedb_write_interval') %>
 <% end -%>
-<% unless scope.lookupvar('exclude').empty? -%>
-<% if scope.lookupvar('exclude').is_a?(Array) -%>
-exclude: (<%= scope.lookupvar('exclude').join('|') %>)
-<% elsif scope.lookupvar('exclude').is_a?(String) -%>
-exclude: (<%= scope.lookupvar('exclude') %>)
-<% end -%>
-<% end -%>
-
