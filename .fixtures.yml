@@ -1,6 +1,14 @@
 fixtures:
-  repositories:
-    stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
+  forge_modules:
+    python:
+      repo: "stankevich/python"
+      ref: "1.7.5"
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "4.5.0"
+    systemd:
+      repo: "camptocamp/systemd"
+      ref: "0.1.7"
   symlinks:
     beaver: "#{source_dir}"
 

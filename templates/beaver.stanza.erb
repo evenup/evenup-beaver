@@ -1,19 +1,27 @@
-[<%= scope.lookupvar('source_real') %>]
-<% if scope.lookupvar('redis_url') != '' -%>
-redis_url: <%= scope.lookupvar('redis_url') %>
+[<%= @source_real %>]
+<% if @redis_url -%>
+redis_url: <%= @redis_url %>
 <% end -%>
-<% if scope.lookupvar('redis_namespace') != '' -%>
-redis_namespace: <%= scope.lookupvar('redis_namespace') %>
+<% if @redis_namespace -%>
+redis_namespace: <%= @redis_namespace %>
 <% end -%>
-type: <%= scope.lookupvar('type') %>
-<% if scope.lookupvar('tags').is_a?(Array) -%>
-tags: <%= scope.lookupvar('tags').join(',') %>
-<% elsif scope.lookupvar('tags').is_a?(String) -%>
-tags: <%= scope.lookupvar('tags') %>
+type: <%= @type %>
+<% if @tags.is_a?(Array) -%>
+tags: <%= @tags.join(',') %>
+<% elsif @tags.is_a?(String) -%>
+tags: <%= @tags %>
 <% end -%>
-<% if scope.lookupvar('format') != '' -%>
-format: <%= scope.lookupvar('format') %>
+<% if @format -%>
+format: <%= @format %>
 <% end -%>
 <% if scope.lookupvar('beaver::enable_sincedb') -%>
 sincedb_write_interval: <%= scope.lookupvar('sincedb_write_interval') %>
 <% end -%>
+<% unless @exclude.empty? -%>
+<% if @exclude.is_a?(Array) -%>
+exclude: (<%= @exclude.join('|') %>)
+<% elsif @exclude.is_a?(String) -%>
+exclude: (<%= @exclude %>)
+<% end -%>
+<% end -%>
+

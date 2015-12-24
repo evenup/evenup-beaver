@@ -8,11 +8,6 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2013 EvenUp.
-#
 class beaver::service {
 
   if $caller_module_name != $module_name {
@@ -31,7 +26,7 @@ class beaver::service {
   }
 
   service { 'beaver':
-    ensure  => $ensure_real,
-    enable  => $enable_real,
+    ensure => $ensure_real,
+    enable => $enable_real,
   }
 }

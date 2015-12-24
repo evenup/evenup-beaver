@@ -17,6 +17,29 @@
 #   String.  Package provider for beaver
 #   Default: pip
 #
+# [*service_provider*]
+#   String.  What service provider to use for this machine.  Determined by os/version
+#
+# [*python_version*]
+#   String: Version of python for virtualenv
+#   Default: 2.7
+#
+# [*home*]
+#   String: Home directory for the virtualenv user
+#   Default: /home/beaver
+#
+# [*venv*]
+#   String: Directory target for the virtualenv
+#   Default: ${home}/venv
+#
+# [*user*]
+#   String: User to install/run in virtualenv
+#   Default: beaver
+#
+# [*group*]
+#   String: Group to install/run in virtualenv
+#   Default: beaver
+#
 # [*version*]
 #   String.  What version of beaver to install
 #   Default: installed
@@ -37,9 +60,9 @@
 #   String.  Default namespace beaver should write logs to
 #   Default:  logstash::beaver
 #
-# [*logstash_version*]
-#   Integer.  Pre-1.2 (0) or 1.2+ logstash (1)?
-#   Default: 0
+# [*queue_timeout*]
+#   Integer. Timeout value for active queues.
+#   Default: 60
 #
 # [*enable_sincedb*]
 #   Boolean.  Whether or not sincedb tracking should be enabled
@@ -55,6 +78,10 @@
 # [*multiline_regex_before*]
 #   String.   If a line match this regular expression, it will be merged with previous line(s).
 #
+# [*stanzas*]
+#   Hash.  Structure matches parameters from beaver::stanza
+#
+#
 # === Examples
 #
 # * Installation:
@@ -65,38 +92,39 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2013 EvenUp.
-#
 class beaver (
-  $enable                 = $beaver::params::enable,
-  $package_name           = $beaver::params::package_name,
-  $package_provider       = $beaver::params::package_provider,
-  $version                = $beaver::params::version,
-  $redis_host             = $beaver::params::redis_host,
-  $redis_db               = $beaver::params::redis_db,
-  $redis_port             = $beaver::params::redis_port,
-  $redis_namespace        = $beaver::params::redis_namespace,
-  $logstash_version       = $beaver::params::logstash_version,
-  $enable_sincedb         = $beaver::params::enable_sincedb,
-  $sincedb_path           = $beaver::params::sincedb_path,
-  $multiline_regex_after  = $beaver::params::multiline_regex_after,
-  $multiline_regex_before = $beaver::params::multiline_regex_before,
+  $enable                 = $::beaver::params::enable,
+  $package_name           = $::beaver::params::package_name,
+  $package_provider       = $::beaver::params::package_provider,
+  $service_provider       = $::beaver::params::service_provider,
+  $python_version         = $::beaver::params::python_version,
+  $home                   = $::beaver::params::home,
+  $venv                   = $::beaver::params::venv,
+  $user                   = $::beaver::params::user,
+  $group                  = $::beaver::params::group,
+  $version                = $::beaver::params::version,
+  $redis_host             = $::beaver::params::redis_host,
+  $redis_db               = $::beaver::params::redis_db,
+  $redis_port             = $::beaver::params::redis_port,
+  $redis_namespace        = $::beaver::params::redis_namespace,
+  $queue_timeout          = $::beaver::params::queue_timeout,
+  $enable_sincedb         = $::beaver::params::enable_sincedb,
+  $sincedb_path           = $::beaver::params::sincedb_path,
+  $multiline_regex_after  = $::beaver::params::multiline_regex_after,
+  $multiline_regex_before = $::beaver::params::multiline_regex_before,
+  $stanzas                = $::beaver::params::stanzas,
 ) inherits beaver::params {
 
   validate_bool($enable, $enable_sincedb)
-  if type($redis_db) != 'integer' { fail('redis_db is not an integer') }
-  if type($redis_port) != 'integer' { fail('redis_port is not an integer') }
-  if $logstash_version > 1 {
-    fail("logstash_version must be 0 or 1, got ${logstash_version}")
-  }
+  if ! is_integer($redis_db) { fail('redis_db is not an integer') }
+  if ! is_integer($redis_port) { fail('redis_port is not an integer') }
   validate_string($redis_host, $redis_namespace)
 
-  class { 'beaver::package': } ->
-  class { 'beaver::config': } ~>
-  class { 'beaver::service': } ->
-  Class['beaver']
+  class { '::beaver::package': } ->
+  class { '::beaver::config': } ->
+  class { '::beaver::stanzas': } ~>
+  class { '::beaver::service': }
+  Class['::Beaver::Package'] ~> Class['::Beaver::Service']
+  Class['::Beaver::Config'] ~> Class['::Beaver::Service']
 
 }

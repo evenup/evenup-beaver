@@ -29,40 +29,40 @@
 #   Integer.  Number of seconds between sincedb write updates
 #   Default: 3
 #
+# [*exlcude*]
+#   String/Array of strings.  Valid python regex strings to exlude
+#   from file globs.
 #
 # === Authors
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2013 EvenUp.
-#
 define beaver::stanza (
   $type,
-  $source                 = '',
+  $source                 = undef,
   $tags                   = [],
-  $redis_url              = '',
-  $redis_namespace        = '',
-  $format                 = '',
+  $redis_url              = undef,
+  $redis_namespace        = undef,
+  $format                 = undef,
+  $exclude                = [],
   $sincedb_write_interval = 300,
 ){
 
-  $source_real = $source ? {
-    ''      => $name,
-    default => $source,
+  if $source {
+    $source_real = $source
+  } else {
+    $source_real = $name
   }
 
-  validate_string($type, $source, $source_real)
-  if type($sincedb_write_interval) != 'integer' { fail('sincedb_write_interval is not an integer') }
+  validate_string($type, $source_real)
+  if ! is_integer($sincedb_write_interval) { fail('sincedb_write_interval is not an integer') }
 
-  include beaver
+  include ::beaver
   Class['beaver::package'] ->
   Beaver::Stanza[$name] ~>
   Class['beaver::service']
 
-  $filename = regsubst($name, '[/:\n]', '_', 'GM')
+  $filename = regsubst($name, '[/:\n\*]', '_', 'GM')
   file { "/etc/beaver/conf.d/${filename}":
     ensure  => 'file',
     owner   => 'root',
