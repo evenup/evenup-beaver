@@ -37,10 +37,6 @@
 #   String.  Default namespace beaver should write logs to
 #   Default:  logstash::beaver
 #
-# [*queue_timeout*]
-#   Integer. Timeout value for active queues.
-#   Default: 60
-#
 # [*logstash_version*]
 #   Integer.  Pre-1.2 (0) or 1.2+ logstash (1)?
 #   Default: 0
@@ -83,7 +79,6 @@ class beaver (
   $redis_db               = $beaver::params::redis_db,
   $redis_port             = $beaver::params::redis_port,
   $redis_namespace        = $beaver::params::redis_namespace,
-  $queue_timeout          = $beaver::params::queue_timeout,
   $logstash_version       = $beaver::params::logstash_version,
   $enable_sincedb         = $beaver::params::enable_sincedb,
   $sincedb_path           = $beaver::params::sincedb_path,

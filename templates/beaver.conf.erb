@@ -2,7 +2,6 @@
 [beaver]
 redis_url = redis://<%= scope.lookupvar('beaver::redis_host') %>:<%= scope.lookupvar('beaver::redis_port') %>/<%= scope.lookupvar('beaver::redis_db') %>
 redis_namespace: <%= scope.lookupvar('beaver::redis_namespace') %>
-queue_timeout: <%= scope.lookupvar('beaver::queue_timeout') %>
 logstash_version: <%= scope.lookupvar('beaver::logstash_version') %>
 <% if scope.lookupvar('beaver::enable_sincedb') -%>
 sincedb_path: <%= scope.lookupvar('beaver::sincedb_path') %>
