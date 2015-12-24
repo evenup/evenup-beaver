@@ -17,58 +17,16 @@
 #
 # Copyright 2013 EvenUp.
 #
-class beaver::package (
-  $venv           = $beaver::venv,
-  $package_name   = $beaver::package_name,
-  $provider       = $beaver::package_provider,
-  $python_version = $beaver::python_version,
-  $version        = $beaver::version,
-  $user           = $beaver::user,
-  $group          = $beaver::group,
-  $home           = $beaver::home,
-) {
+class beaver::package {
 
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  # Setup some variables for the virtualenv
-  $venv_environment = [
-    "PATH=${venv}/bin:\$PATH",
-    "VIRTUAL_ENV=${venv}",
-  ]
-
-  if $provider == 'virtualenv' {
-    python::virtualenv { $venv:
-      ensure  => present,
-      version => $python_version,
-      owner   => $user,
-      group   => $group,
-      require => Class['python'],
-    }
-
-    python::pip { $package_name:
-      ensure       => present,
-      pkgname      => $package_name,
-      virtualenv   => $venv,
-      install_args => "--download-cache ${venv}/.pip-cache",
-      owner        => 'root',
-      require      => User[$user],
-      notify       => Class['beaver::service'],
-    }
-
-    user { $user:
-      ensure     => present,
-      home       => $home,
-      managehome => true,
-      system     => true,
-    }
-  } else {
-    package { $package_name:
-      ensure    => $version,
-      provider  => $provider,
-      notify    => Class['beaver::service'],
-    }
+  package { $beaver::package_name:
+    ensure    => $beaver::version,
+    provider  => $beaver::package_provider,
+    notify    => Class['beaver::service'],
   }
 
   file { '/etc/init.d/beaver':
@@ -76,7 +34,7 @@ class beaver::package (
     mode    => '0555',
     owner   => 'root',
     group   => 'root',
-    content => template('beaver/beaver.init.erb'),
+    source  => 'puppet:///modules/beaver/beaver.init',
   }
 
   file { '/etc/beaver':
