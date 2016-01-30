@@ -47,7 +47,7 @@ class beaver::package (
       ensure       => $version,
       pkgname      => $package_name,
       virtualenv   => $venv,
-      install_args => "--download-cache ${venv}/.pip-cache",
+      install_args => "--cache-dir ${venv}/.pip-cache",
       owner        => 'root',
       require      => User[$user],
       notify       => Class['beaver::service'],
