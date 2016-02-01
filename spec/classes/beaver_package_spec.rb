@@ -53,7 +53,7 @@ describe 'beaver' do
         context 'version 7' do
           let(:facts) { { :operatingsystem => operatingsystem, :operatingsystemmajrelease => '7' } }
           it { should contain_file('/lib/systemd/system/beaver.service') }
-          it { should_not contain_file('/etc/init.d/beaver') }
+          it { should contain_file('/etc/init.d/beaver').with_ensure('absent') }
         end
 
         context 'version 6' do
@@ -66,7 +66,7 @@ describe 'beaver' do
       context 'Debian version 8' do
         let(:facts) { { :operatingsystem => 'Debian', :operatingsystemmajrelease => '8' } }
         it { should contain_file('/lib/systemd/system/beaver.service') }
-        it { should_not contain_file('/etc/init.d/beaver') }
+        it { should contain_file('/etc/init.d/beaver').with_ensure('absent') }
       end
 
       context 'Debian version 7' do
@@ -78,7 +78,7 @@ describe 'beaver' do
       context 'Ubuntu version 15.04' do
         let(:facts) { { :operatingsystem => 'Ubuntu', :operatingsystemmajrelease => '15.04' } }
         it { should contain_file('/lib/systemd/system/beaver.service') }
-        it { should_not contain_file('/etc/init.d/beaver') }
+        it { should contain_file('/etc/init.d/beaver').with_ensure('absent') }
       end
 
       context 'Ubuntu version 14.04' do

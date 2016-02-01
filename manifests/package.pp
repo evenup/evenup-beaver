@@ -78,6 +78,14 @@ class beaver::package (
   } else {
     include ::systemd
     
+    exec { 'switch-init-to-systemd':
+      path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+      onlyif  => 'test -e /var/run/beaver.pid',
+      command => '/etc/init.d/beaver stop || kill $(cat /var/run/beaver.pid) && rm -f /var/run/beaver.pid',
+    }->
+    file { '/etc/init.d/beaver':
+      ensure => absent,
+    }->
     file { '/lib/systemd/system/beaver.service':
       ensure  => file,
       owner   => 'root',
