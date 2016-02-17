@@ -4,6 +4,10 @@
 #
 #
 # === Parameters
+# [*ensure*]
+#   String.  Passed to file resource
+#   Default: file
+#
 # [*type*]
 #   String.  Type to be passed on to logstash
 #
@@ -49,6 +53,7 @@
 #
 define beaver::stanza (
   $type,
+  $ensure                 = 'file',
   $source                 = undef,
   $tags                   = [],
   $redis_url              = undef,
@@ -77,7 +82,7 @@ define beaver::stanza (
 
   $filename = regsubst($name, '[/:\n\*]', '_', 'GM')
   file { "/etc/beaver/conf.d/${filename}":
-    ensure  => 'file',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     content => template("${module_name}/beaver.stanza.erb"),
