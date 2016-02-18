@@ -61,4 +61,21 @@ describe 'beaver::stanza', :type => :define do
     it { should contain_file('/etc/beaver/conf.d/_var_log_messages__.log') }
   end
 
+  context 'ensure file' do
+    let(:title) {'/var/log/messages:*.log'}
+    let(:params) { {
+      :type => 'json'
+    } }
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages__.log').with(:ensure => 'file') }
+  end
+
+  context 'ensure absent' do
+    let(:title) {'/var/log/messages:*.log'}
+    let(:params) { {
+      :type => 'json',
+      :ensure => 'absent'
+    } }
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages__.log').with(:ensure => 'absent') }
+  end
+
 end
